@@ -1,4 +1,4 @@
-MAINPACKAGE=main
+MAINPACKAGE=app
 EXENAME=goapp
 BUILDPATH=$(CURDIR)
 export GOPATH=$(CURDIR)
@@ -26,8 +26,8 @@ clean :
 	@rm -rf $(BUILDPATH)/bin
 
 test :
-	go test -race -coverprofile=coverage.txt -covermode=atomic -short ./src/main/*.go
+	go test -race -coverprofile=coverage.txt -covermode=atomic -short ./src/app
 
 cover :
-	go test -v -coverprofile=main.out ./src/main/*.go
+	go test -v -coverprofile=main.out ./src/app
 	go tool cover -html=main.out
