@@ -1,14 +1,14 @@
-package main
+package invers
 
 import "testing"
 
 func TestInvers(t *testing.T) {
-	tests := []struct{
-		in bool
+	tests := []struct {
+		in   bool
 		want bool
-	} {
-		{ true, false},
-		{ false, true},
+	}{
+		{true, false},
+		{false, true},
 	}
 	for _, test := range tests {
 		if got := Invers(test.in); got != test.want {

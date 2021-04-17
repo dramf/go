@@ -1,20 +1,18 @@
-FROM golang:alpine as gobuilder
-RUN apk add --update make git
+FROM golang:1.16-alpine as gobuilder
 ADD . /gobase/
 WORKDIR /gobase/
-ENV GOPATH=$GOPATH:/gobase
-RUN make all
+RUN go build -o myapp
 
 FROM alpine
 
 RUN mkdir /app
-COPY --from=gobuilder /gobase/bin/goapp /app/
+COPY --from=gobuilder /gobase/myapp /app/
 WORKDIR /app
 
-RUN chmod +x goapp
+RUN chmod +x myapp
 RUN adduser -D -g '' gouser
 RUN chown -R gouser:gouser /app
 
 USER gouser
 
-ENTRYPOINT ["/app/goapp"]
+ENTRYPOINT ["/app/myapp"]
